@@ -2,6 +2,28 @@
 
 Shubham 
 
+
+Queries
+
+1.Top 5 earning employees
+
+Employee.all.order(salary: :desc).limit(5)
+
+2.All employees in Pune(or any other city)
+Input : city_paramater = "pune"
+
+Employee.joins(:address).where("addresses.city = ?",city_paramater).pluck(:name)
+
+3.Search any employee via name and/or email should return the name email and his/her address
+Input : employee_name_parameter = "Shubham"
+
+Employee.joins(:company).joins(:address).where("name = ?",employee_name_paramater).pluck(:email,:city,:country,:company_name)
+
+4.List of employees earning between 10K to 50K
+
+Employee.where("salary <?",50000).where("salary >?",10000)
+
+
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
